@@ -36,8 +36,9 @@ public class SpiderMan {
     }
 
     public static void main(String[] args) throws Exception {
-        // TODO:
 
+        //===============================================================
+        // get all films for all letters
         final LetterParser lp = new LetterParser();
 
         DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -64,9 +65,8 @@ public class SpiderMan {
 
         final FilmParser fp = new FilmParser();
 
-        //===========================
-        // store all to mongodb
-        // TODO: refactor to make butifull!
+        //===============================================================
+        // for each film URL - retrieve film details and store it to mongodb
         MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
 
         HttpHelper<Film> h2 = new HttpHelper<Film>(httpclient);
@@ -85,9 +85,6 @@ public class SpiderMan {
             mch.getConnection().save(film);
             System.out.printf("Film= %s\n", film);
         }
-
-
-
 
     }
 }

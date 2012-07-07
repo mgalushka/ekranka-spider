@@ -4,6 +4,7 @@ import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.query.Criteria;
 import com.maximgalushka.ekranka.spider.domain.Film;
+import com.maximgalushka.ekranka.spider.mongo.MongoConnectionHelper;
 import com.mongodb.Mongo;
 
 import java.net.UnknownHostException;
@@ -19,12 +20,9 @@ public class QueryFilm {
 
     public static void main(String[] args) throws UnknownHostException {
 
-        // TODO: gererify this
-        Mongo m = new Mongo("ds031597.mongolab.com", 31597);
-        Datastore ds = new Morphia().createDatastore(m, "ekranka", "ekranka", "ekranka".toCharArray());
+        MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
 
-//        Criteria c = new C
-        List<Film> result = ds.find(Film.class).field("year").greaterThan(2008).asList();
+        List<Film> result = mch.getConnection().find(Film.class).field("year").greaterThan(2008).asList();
 
         System.out.printf("Films > 2008:\n %s\n", result);
 
