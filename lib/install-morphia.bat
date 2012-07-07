@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=morphia-0.99.jar -DgroupId=com.google.code.morphia -DartifactId=morphia -Dversion=0.99 -Dpackaging=jar
