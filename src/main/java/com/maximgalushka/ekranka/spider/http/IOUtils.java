@@ -44,39 +44,4 @@ public final class IOUtils {
             return "";
         }
     }
-
-
-    private static final char[] ILLEGAL_CHARACTERS = { '/', '\n', '\r', '\t', '\0', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':' };
-
-    public static String formatFileName(String name){
-        for(char c : ILLEGAL_CHARACTERS){
-            name = name.replace(c, ' ');
-        }
-        return name;
-    }
-
-    /**
-     * @param filePath the name of the file to open.
-     *                  Not sure if it can accept URLs or just filenames.
-     *                  Encoding is default: UTF-8
-     * @return string converted from file
-     * @throws java.io.IOException if
-     */
-    public static String readFileAsString(String filePath)
-            throws IOException{
-
-        return readFileAsString(filePath, "utf-8");
-    }
-
-    /**
-     * @param filePath the name of the file to open.
-     *                  Not sure if it can accept URLs or just filenames.
-     * @param encoding encoding to convert file from
-     * @return string converted from file
-     * @throws java.io.IOException if
-     */
-    public static String readFileAsString(String filePath, String encoding)
-            throws IOException{
-        return convertStreamToString(new FileInputStream(filePath), encoding);
-    }
 }

@@ -12,8 +12,6 @@ import java.util.List;
 /**
  * <p>The basic domain model for any ekranka.ru film details</p>
  *
- * It is planned to make this also MongoDb object.
- *
  * @author Maxim Galushka
  * @since 06.07.12
  */
