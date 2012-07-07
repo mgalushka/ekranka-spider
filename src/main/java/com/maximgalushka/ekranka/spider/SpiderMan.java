@@ -1,10 +1,13 @@
 package com.maximgalushka.ekranka.spider;
 
+import com.google.code.morphia.Datastore;
+import com.google.code.morphia.Morphia;
 import com.maximgalushka.ekranka.spider.domain.Film;
 import com.maximgalushka.ekranka.spider.http.HttpCallbackHandler;
 import com.maximgalushka.ekranka.spider.http.HttpHelper;
 import com.maximgalushka.ekranka.spider.parsers.FilmParser;
 import com.maximgalushka.ekranka.spider.parsers.LetterParser;
+import com.mongodb.Mongo;
 import org.apache.http.HttpHost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -62,6 +65,12 @@ public class SpiderMan {
 
         final FilmParser fp = new FilmParser();
 
+        //===========================
+        // store all to mongodb
+        // TODO: refactor to make butifull!
+        Mongo m = new Mongo("ds031597.mongolab.com", 31597);
+        Datastore ds = new Morphia().createDatastore(m, "ekranka", "ekranka", "ekranka".toCharArray());
+
         HttpHelper<Film> h2 = new HttpHelper<Film>(httpclient);
         for(String url : allFilms){
             System.out.printf("Parsing: [%s]\n", url);
@@ -74,8 +83,13 @@ public class SpiderMan {
                         }
                     }, "windows-1251");
 
+            // storing remotely
+            ds.save(film);
             System.out.printf("Film= %s\n", film);
         }
+
+
+
 
     }
 }

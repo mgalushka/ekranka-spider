@@ -1,17 +1,26 @@
 package com.maximgalushka.ekranka.spider.domain;
 
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Property;
+import org.bson.types.ObjectId;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>The basic domain model for any ekranka film details</p>
+ * <p>The basic domain model for any ekranka.ru film details</p>
  *
  * It is planned to make this also MongoDb object.
  *
  * @author Maxim Galushka
  * @since 06.07.12
  */
+@Entity("films")
 public class Film {
+
+    @Id
+    private ObjectId id;
 
     private String title;
     private String director;
@@ -22,7 +31,10 @@ public class Film {
     // minutes
     private Integer duration;
 
+    @Property
     private List<String> countries = new ArrayList<String>();
+
+    @Property
     private List<String> genres = new ArrayList<String>();
 
     public Film() {
@@ -117,7 +129,7 @@ public class Film {
     @Override
     public String toString() {
         return String.format("Film [title='%s', director='%s', " +
-                "year=%d, rating=%f, duration=%d, countries=%s, genres=%s]",
+                "year=%d, rating=%f, duration=%d, countries=%s, genres=%s]\n",
                 title, director, year, rating, duration, countries, genres);
     }
 }

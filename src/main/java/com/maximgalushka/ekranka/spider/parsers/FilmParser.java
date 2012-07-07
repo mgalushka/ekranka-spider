@@ -25,25 +25,30 @@ public class FilmParser implements PageParser<Film> {
 
         Film film = new Film();
 
-        String title = new Parser(input).parse(new TagNameFilter("h1")).toNodeArray()[0].getFirstChild().getText();
-        film.setTitle(title);
 
-        NodeList td = new Parser(input).parse(new AndFilter(
-                new TagNameFilter("td"), new HasChildFilter(new StringFilter("Средняя оценка:"), true)));
-        //new TagNameFilter("h1")).toNodeArray()[0].getText();
+        try {
+            String title = new Parser(input).parse(new TagNameFilter("h1")).toNodeArray()[0].getFirstChild().getText();
+            film.setTitle(title);
 
-        Node[] nodes = td.toNodeArray();
-        Node tag = nodes[3];
-        ImageTag it = (ImageTag) ((TableColumn) tag).getChild(1).getFirstChild();
-        String rateStr = it.getAttribute("title");
-        Float rate = Float.parseFloat(rateStr.substring(rateStr.indexOf(":")+1));
-        film.setRating(rate);
+            NodeList td = new Parser(input).parse(new AndFilter(
+                    new TagNameFilter("td"), new HasChildFilter(new StringFilter("Средняя оценка:"), true)));
+            //new TagNameFilter("h1")).toNodeArray()[0].getText();
 
-        LinkTag l = (LinkTag) ((TableColumn) tag).getChild(4);
-        film.setYear(Integer.parseInt(l.getFirstChild().getText()));
+            Node[] nodes = td.toNodeArray();
+            Node tag = nodes[3];
+            ImageTag it = (ImageTag) ((TableColumn) tag).getChild(1).getFirstChild();
+            String rateStr = it.getAttribute("title");
+            Float rate = Float.parseFloat(rateStr.substring(rateStr.indexOf(":")+1));
+            film.setRating(rate);
+
+            LinkTag l = (LinkTag) ((TableColumn) tag).getChild(4);
+            film.setYear(Integer.parseInt(l.getFirstChild().getText()));
 
 //        LinkTag d = (LinkTag) ((TableColumn) tag).getChild(24);
 //        film.setDirector(d.getFirstChild().getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return film;
     }
