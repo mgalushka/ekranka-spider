@@ -1,11 +1,7 @@
 package com.maximgalushka.ekranka.spider;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.query.Criteria;
 import com.maximgalushka.ekranka.spider.domain.Film;
 import com.maximgalushka.ekranka.spider.mongo.MongoConnectionHelper;
-import com.mongodb.Mongo;
 
 import java.net.UnknownHostException;
 import java.util.List;

@@ -29,6 +29,8 @@ public final class Film implements Serializable {
 
     private Float rating;
 
+    private String url;
+
     // minutes
     private Integer duration;
 
@@ -97,6 +99,14 @@ public final class Film implements Serializable {
         this.genres = genres;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,7 +140,7 @@ public final class Film implements Serializable {
     @Override
     public String toString() {
         return String.format("Film [title='%s', director='%s', " +
-                "year=%d, rating=%f, duration=%d, countries=%s, genres=%s]\n",
-                title, director, year, rating, duration, countries, genres);
+                "year=%d, rating=%f, duration=%d, countries=%s, genres=%s, url=%s]\n",
+                title, director, year, rating, duration, countries, genres, url);
     }
 }

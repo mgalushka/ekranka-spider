@@ -21,6 +21,8 @@ import java.util.List;
  */
 public class SpiderMan {
 
+    public static final String EKRANKA_HOSTNAME = "www.ekranka.ru";
+
     private static List<String> fullAlphabet(){
         List<String> alphabet = new ArrayList<String>();
         for(char l = 'A'; l < 'Z' ;l++){
@@ -50,7 +52,7 @@ public class SpiderMan {
             String url = String.format("/films/%s/", l);
             System.out.printf("%s\n", url);
             List<String> result = h.get(url,
-                    new HttpHost("www.ekranka.ru"),
+                    new HttpHost(EKRANKA_HOSTNAME),
                     new HttpCallbackHandler<List<String>>() {
                 @Override
                 public List<String> process(String content) throws Exception {
@@ -70,14 +72,16 @@ public class SpiderMan {
         MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
 
         HttpHelper<Film> h2 = new HttpHelper<Film>(httpclient);
-        for(String url : allFilms){
+        for(final String url : allFilms){
             System.out.printf("Parsing: [%s]\n", url);
             Film film = h2.get(url,
-                    new HttpHost("www.ekranka.ru"),
+                    new HttpHost(EKRANKA_HOSTNAME),
                     new HttpCallbackHandler<Film>() {
                         @Override
                         public Film process(String content) throws Exception {
-                            return fp.parse(content);
+                            Film result = fp.parse(content);
+                            result.setUrl(String.format("http://%s%s", EKRANKA_HOSTNAME, url));
+                            return result;
                         }
                     }, "windows-1251");
 
