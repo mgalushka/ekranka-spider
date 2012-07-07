@@ -23,7 +23,6 @@ public class QueryFilm {
         MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
 
         List<Film> result = mch.getConnection().find(Film.class).field("year").greaterThan(2008).asList();
-
         System.out.printf("Films > 2008:\n %s\n", result);
 
     }

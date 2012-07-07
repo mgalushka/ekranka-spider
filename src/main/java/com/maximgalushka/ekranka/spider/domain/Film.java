@@ -15,7 +15,7 @@ import java.util.List;
  * @author Maxim Galushka
  * @since 06.07.12
  */
-@Entity("films")
+@Entity(value = "films", noClassnameStored = true)
 public final class Film implements Serializable {
 
     private static final long serialVersionUID = 7276782241886775371L;

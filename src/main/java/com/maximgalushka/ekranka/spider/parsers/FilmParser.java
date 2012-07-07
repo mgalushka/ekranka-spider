@@ -27,8 +27,7 @@ public class FilmParser implements PageParser<Film> {
 
 
         try {
-            String title = new Parser(input).parse(new TagNameFilter("h1")).toNodeArray()[0].getFirstChild().getText();
-            film.setTitle(title);
+            film.setTitle(parseTitle(input));
 
             NodeList td = new Parser(input).parse(new AndFilter(
                     new TagNameFilter("td"), new HasChildFilter(new StringFilter("Средняя оценка:"), true)));
@@ -51,5 +50,26 @@ public class FilmParser implements PageParser<Film> {
         }
 
         return film;
+    }
+
+    private String parseTitle(String input){
+        try {
+            return new Parser(input).parse(new TagNameFilter("h1")).toNodeArray()[0].getFirstChild().getText();
+        } catch (ParserException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private Integer parseYear(NodeList td){
+        try {
+            Node[] nodes = td.toNodeArray();
+            Node tag = nodes[3];
+            LinkTag l = (LinkTag) ((TableColumn) tag).getChild(4);
+            return Integer.parseInt(l.getFirstChild().getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
