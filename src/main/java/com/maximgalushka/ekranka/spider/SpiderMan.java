@@ -80,7 +80,7 @@ public class SpiderMan {
                         @Override
                         public Film process(String content) throws Exception {
                             Film result = fp.parse(content);
-                            result.setUrl(String.format("http://%s%s", EKRANKA_HOSTNAME, url));
+                            result.setUrl(url);
                             return result;
                         }
                     }, "windows-1251");
