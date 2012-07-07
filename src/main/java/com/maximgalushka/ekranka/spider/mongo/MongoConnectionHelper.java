@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
  * @author Maxim Galushka
  * @since 07.07.12
  */
-public class MongoConnectionHelper {
+public final class MongoConnectionHelper {
 
     private static final MongoConnectionHelper helper = new MongoConnectionHelper();
 

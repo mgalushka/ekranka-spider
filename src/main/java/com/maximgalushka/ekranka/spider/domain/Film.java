@@ -5,6 +5,7 @@ import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Property;
 import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,9 @@ import java.util.List;
  * @since 06.07.12
  */
 @Entity("films")
-public class Film {
+public final class Film implements Serializable {
+
+    private static final long serialVersionUID = 7276782241886775371L;
 
     @Id
     private ObjectId id;
