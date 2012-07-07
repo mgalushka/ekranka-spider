@@ -27,7 +27,10 @@ public class FilmParser implements PageParser<Film> {
     public Film parse(String input) throws ParserException {
         Film film = new Film();
 
-        film.setTitle(parseTitle(input));
+        String title = parseTitle(input);
+        if(title == null) return  null;
+
+        film.setTitle(title);
 
         NodeList td = new Parser(input).parse(new AndFilter(
                 new TagNameFilter("td"),
@@ -96,7 +99,7 @@ public class FilmParser implements PageParser<Film> {
     private String parseTitle(String input){
         try {
             return new Parser(input).parse(new TagNameFilter("h1")).toNodeArray()[0].getFirstChild().getText();
-        } catch (ParserException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

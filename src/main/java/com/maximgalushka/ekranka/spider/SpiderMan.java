@@ -80,14 +80,18 @@ public class SpiderMan {
                         @Override
                         public Film process(String content) throws Exception {
                             Film result = fp.parse(content);
+                            if(result == null) return null;
+
                             result.setUrl(url);
                             return result;
                         }
                     }, "windows-1251");
 
             // storing remotely
-            mch.getConnection().save(film);
-            System.out.printf("Film= %s\n", film);
+            if(film != null){
+                mch.getConnection().save(film);
+                System.out.printf("Film= %s\n", film);
+            }
         }
 
     }
