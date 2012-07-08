@@ -21,6 +21,7 @@ public class QueryFilm {
         MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
 
         Datastore ds = mch.getConnection();
+
         Query<Film> q = ds.createQuery(Film.class).filter("duration <", 50).filter("rating >=", 4F).order("rating");
         List<Film> result = q.asList();
         System.out.printf("Films:\n %s\n", result);
