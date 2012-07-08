@@ -1,5 +1,7 @@
 package com.maximgalushka.ekranka.spider;
 
+import com.google.code.morphia.Datastore;
+import com.google.code.morphia.query.Query;
 import com.maximgalushka.ekranka.spider.domain.Film;
 import com.maximgalushka.ekranka.spider.mongo.MongoConnectionHelper;
 
@@ -18,8 +20,14 @@ public class QueryFilm {
 
         MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
 
-        List<Film> result = mch.getConnection().find(Film.class).field("year").greaterThan(2008).asList();
-        System.out.printf("Films > 2008:\n %s\n", result);
+        Datastore ds = mch.getConnection();
+        Query<Film> q = ds.createQuery(Film.class).filter("duration <", 50).filter("rating >=", 4F).order("rating");
+        List<Film> result = q.asList();
+        System.out.printf("Films:\n %s\n", result);
+
+//        List r = mch.getConnection().getMongo().getDB("").getCollection("films").distinct("director");
+//        System.out.printf("Directors: %s\n", r);
+
 
     }
 }
