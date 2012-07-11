@@ -16,7 +16,7 @@ import java.util.List;
  * @since 06.07.12
  */
 @Entity(value = "films", noClassnameStored = true)
-public final class Film implements Serializable {
+public final class Film implements Serializable, Comparable <Film> {
 
     private static final long serialVersionUID = 7276782241886775371L;
 
@@ -142,5 +142,16 @@ public final class Film implements Serializable {
         return String.format("Film [title='%s', director='%s', " +
                 "year=%d, rating=%f, duration=%d, countries=%s, genres=%s, url=%s]\n",
                 title, director, year, rating, duration, countries, genres, url);
+    }
+
+    @Override
+    public int compareTo(Film o) {
+        if(this.title == null) return -1;
+        if(o == null || o.title == null) return 1;
+        return this.title.compareTo(o.title);
+
+//        if(this.rating == null) return -1;
+//        if(o == null || o.rating == null) return 1;
+//        return this.rating.compareTo(o.rating);
     }
 }
