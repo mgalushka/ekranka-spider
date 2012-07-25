@@ -5,6 +5,7 @@ import com.google.code.morphia.query.Criteria;
 import com.google.code.morphia.query.Query;
 import com.maximgalushka.ekranka.spider.domain.Film;
 import com.maximgalushka.ekranka.spider.mongo.MongoConnectionHelper;
+import com.maximgalushka.ekranka.spider.render.HtmlRenderer;
 
 import java.net.UnknownHostException;
 import java.util.LinkedHashSet;
@@ -27,21 +28,25 @@ public class QueryFilm {
         Query<Film> c = ds.createQuery(Film.class);
 
         c.and(
-                c.criteria("duration").lessThanOrEq(90),
-                c.criteria("rating").greaterThanOrEq(3.5F),
-                c.criteria("year").greaterThanOrEq(1995),
-                c.or(
-                    c.criteria("genres").equal("комедия"),
-                    c.criteria("genres").equal("мелодрама")
-                )
+                c.criteria("duration").lessThanOrEq(40),
+                c.criteria("rating").greaterThanOrEq(3.5F)//,
+                //c.criteria("year").greaterThanOrEq(1995),
+//                c.or(
+//                    c.criteria("genres").equal("комедия"),
+//                    c.criteria("genres").equal("мелодрама")
+//                )
         );
 
         Set<Film> result = new LinkedHashSet<Film>(c.order("rating").asList());
-        System.out.printf("Films:\n %s\n", result);
+//        System.out.printf("Films:\n %s\n", result);
 
 //        List r = mch.getConnection().getMongo().getDB("").getCollection("films").distinct("director");
 //        System.out.printf("Directors: %s\n", r);
 
+
+        HtmlRenderer renderer = new HtmlRenderer();
+
+        System.out.printf("\n\n%s\n", renderer.renderHtml(result));
 
     }
 }
