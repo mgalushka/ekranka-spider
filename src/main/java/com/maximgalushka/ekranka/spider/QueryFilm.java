@@ -28,8 +28,8 @@ public class QueryFilm {
         Query<Film> c = ds.createQuery(Film.class);
 
         c.and(
-                c.criteria("duration").lessThanOrEq(40),
-                c.criteria("rating").greaterThanOrEq(3.5F)//,
+//                c.criteria("duration").lessThanOrEq(40),
+                c.criteria("rating").greaterThanOrEq(4F)//,
                 //c.criteria("year").greaterThanOrEq(1995),
 //                c.or(
 //                    c.criteria("genres").equal("комедия"),
