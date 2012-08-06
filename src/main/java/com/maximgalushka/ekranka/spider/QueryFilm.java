@@ -1,7 +1,6 @@
 package com.maximgalushka.ekranka.spider;
 
 import com.google.code.morphia.Datastore;
-import com.google.code.morphia.query.Criteria;
 import com.google.code.morphia.query.Query;
 import com.maximgalushka.ekranka.spider.domain.Film;
 import com.maximgalushka.ekranka.spider.mongo.MongoConnectionHelper;
@@ -9,9 +8,7 @@ import com.maximgalushka.ekranka.spider.render.HtmlRenderer;
 
 import java.net.UnknownHostException;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * <p></p>
@@ -29,12 +26,12 @@ public class QueryFilm {
 
         c.and(
 //                c.criteria("duration").lessThanOrEq(40),
-                c.criteria("rating").greaterThanOrEq(4F)//,
-                //c.criteria("year").greaterThanOrEq(1995),
-//                c.or(
+                c.criteria("rating").greaterThanOrEq(4F),
+                c.criteria("year").greaterThanOrEq(1999),
+                c.or(
 //                    c.criteria("genres").equal("комедия"),
-//                    c.criteria("genres").equal("мелодрама")
-//                )
+                    c.criteria("genres").equal("драма")
+                )
         );
 
         Set<Film> result = new LinkedHashSet<Film>(c.order("rating").asList());
@@ -45,7 +42,6 @@ public class QueryFilm {
 
 
         HtmlRenderer renderer = new HtmlRenderer();
-
         System.out.printf("\n\n%s\n", renderer.renderHtml(result));
 
     }
