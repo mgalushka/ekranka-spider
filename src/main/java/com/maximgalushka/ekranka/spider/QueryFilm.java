@@ -29,8 +29,8 @@ public class QueryFilm {
                 c.criteria("rating").greaterThanOrEq(4F),
                 c.criteria("year").greaterThanOrEq(1999),
                 c.or(
-//                    c.criteria("genres").equal("комедия"),
-                    c.criteria("genres").equal("драма")
+                    c.criteria("genres").equal("комедия")//,
+//                    c.criteria("genres").equal("драма")
                 )
         );
 

@@ -1,9 +1,11 @@
 package com.maximgalushka.ekranka.spider;
 
+import com.google.code.morphia.Datastore;
 import com.maximgalushka.ekranka.spider.domain.Film;
 import com.maximgalushka.ekranka.spider.http.HttpCallbackHandler;
 import com.maximgalushka.ekranka.spider.http.HttpHelper;
 import com.maximgalushka.ekranka.spider.mongo.MongoConnectionHelper;
+import com.maximgalushka.ekranka.spider.mongo.MongoSearch;
 import com.maximgalushka.ekranka.spider.parsers.FilmParser;
 import com.maximgalushka.ekranka.spider.parsers.LetterParser;
 
@@ -88,9 +90,14 @@ public class SpiderMan {
                     }, "windows-1251");
 
             // storing remotely
+            Datastore connection = mch.getConnection();
+            MongoSearch search = new MongoSearch();
             if(film != null){
-                mch.getConnection().save(film);
-                System.out.printf("Film= %s\n", film);
+                if(!search.existed(film)){
+                    System.out.printf("Saving film= %s\n", film);
+                    connection.save(film);
+                }
+                System.out.printf("Film existed = %s\n", film);
             }
         }
 
