@@ -8,6 +8,7 @@ import com.maximgalushka.ekranka.spider.mongo.MongoConnectionHelper;
  * @author Maxim Galushka
  * @since 07.07.12
  */
+@Deprecated
 public class Refresher {
 
     public static void main(String[] args) {
