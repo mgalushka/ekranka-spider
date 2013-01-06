@@ -18,7 +18,7 @@ public class HtmlRenderer {
 
     protected String renderContent(String content){
         return String.format(
-                "<html><head><title>Ekranka best films</title></head><body>%s</body></html>", content);
+                "<html><head><title>Ekranka best films</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head><body>%s</body></html>", content);
     }
 
     protected String renderTable(Collection<Film> films){

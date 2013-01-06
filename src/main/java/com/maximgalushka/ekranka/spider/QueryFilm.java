@@ -26,15 +26,15 @@ public class QueryFilm {
 
         c.and(
 //                c.criteria("duration").lessThanOrEq(40),
-                c.criteria("rating").greaterThanOrEq(4F),
-                c.criteria("year").greaterThanOrEq(1999),
-                c.or(
-                    c.criteria("genres").equal("комедия")//,
+                c.criteria("rating").greaterThanOrEq(3F),
+                c.criteria("year").greaterThanOrEq(2000)//,
+//                c.or(
+//                    c.criteria("genres").equal("комедия")//,
 //                    c.criteria("genres").equal("драма")
-                )
+//                )
         );
 
-        Set<Film> result = new LinkedHashSet<Film>(c.order("rating").asList());
+        Set<Film> result = new LinkedHashSet<Film>(c.order("-rating").asList());
 //        System.out.printf("Films:\n %s\n", result);
 
 //        List r = mch.getConnection().getMongo().getDB("").getCollection("films").distinct("director");
