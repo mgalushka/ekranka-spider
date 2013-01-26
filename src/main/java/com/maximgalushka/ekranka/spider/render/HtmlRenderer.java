@@ -31,7 +31,7 @@ public class HtmlRenderer {
 
     protected String renderRow(Film film){
         return String.format("<tr>" +
-                "<td><a href='%s'>%s</a></td>" +
+                "<td><a href='%s' target='_blank'>%s</a></td>" +
                 "<td>%s</td>" +
                 "<td>%d</td>" +
                 "<td>%f</td>" +
