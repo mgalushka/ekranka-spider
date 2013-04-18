@@ -26,8 +26,9 @@ public class QueryFilm {
 
         c.and(
 //                c.criteria("duration").lessThanOrEq(40),
-                c.criteria("rating").greaterThanOrEq(3F),
+                c.criteria("rating").greaterThanOrEq(4F),
                 c.criteria("year").greaterThanOrEq(2000)//,
+                //c.criteria("genres").equal("комедия")
 //                c.or(
 //                    c.criteria("genres").equal("комедия")//,
 //                    c.criteria("genres").equal("драма")
