@@ -2,6 +2,8 @@ package com.maximgalushka.ekranka.spider.mongo;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
+import com.google.code.morphia.logging.MorphiaLoggerFactory;
+import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
 import com.mongodb.Mongo;
 
 import java.net.UnknownHostException;
@@ -14,6 +16,9 @@ import java.net.UnknownHostException;
  */
 public final class MongoConnectionHelper {
 
+    static{
+        MorphiaLoggerFactory.registerLogger(SLF4JLogrImplFactory.class);
+    }
     private static final MongoConnectionHelper helper = new MongoConnectionHelper();
 
     private Datastore cachedDatastore;
