@@ -19,6 +19,7 @@ public final class MongoConnectionHelper {
     static{
         MorphiaLoggerFactory.registerLogger(SLF4JLogrImplFactory.class);
     }
+
     private static final MongoConnectionHelper helper = new MongoConnectionHelper();
 
     private Datastore cachedDatastore;
