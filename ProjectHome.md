@@ -1,0 +1,1 @@
+Spider for ekranka.ru site - parses and downloads all the content from it
