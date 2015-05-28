@@ -18,32 +18,25 @@ import java.util.Set;
  */
 public class QueryFilm {
 
-    public static void main(String[] args) throws UnknownHostException {
+  public static void main(String[] args) throws UnknownHostException {
 
-        MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
-        Datastore ds = mch.getConnection();
-        Query<Film> c = ds.createQuery(Film.class);
+    MongoConnectionHelper mch = MongoConnectionHelper.getInstance();
+    Datastore ds = mch.getConnection();
+    Query<Film> c = ds.createQuery(Film.class);
 
-        c.and(
-//                c.criteria("duration").lessThanOrEq(40),
-                c.criteria("rating").greaterThanOrEq(4F),
-                c.criteria("year").greaterThanOrEq(2000)//,
-                //c.criteria("genres").equal("комедия")
-//                c.or(
-//                    c.criteria("genres").equal("комедия")//,
-//                    c.criteria("genres").equal("драма")
-//                )
-        );
+    c.and(
+      // c.criteria("duration").lessThanOrEq(40),
+      // c.criteria("rating").greaterThanOrEq(4F),
+      // c.criteria("year").greaterThanOrEq(2000)//,
+      c.criteria("genres").equal("драма")
+      //c.or(
+      //    c.criteria("genres").equal("комедия")
+      //    c.criteria("genres").equal("драма")
+      //)
+    );
 
-        Set<Film> result = new LinkedHashSet<Film>(c.order("-rating").asList());
-//        System.out.printf("Films:\n %s\n", result);
-
-//        List r = mch.getConnection().getMongo().getDB("").getCollection("films").distinct("director");
-//        System.out.printf("Directors: %s\n", r);
-
-
-        HtmlRenderer renderer = new HtmlRenderer();
-        System.out.printf("\n\n%s\n", renderer.renderHtml(result));
-
-    }
+    Set<Film> result = new LinkedHashSet<Film>(c.order("-rating").asList());
+    HtmlRenderer renderer = new HtmlRenderer();
+    System.out.printf("\n\n%s\n", renderer.renderHtml(result));
+  }
 }
